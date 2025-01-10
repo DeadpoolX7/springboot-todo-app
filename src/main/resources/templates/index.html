@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Todo supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--        <link rel="stylesheet" href="/css/Style.css">-->
+
+    </head>
+    <body>
+        <div>
+            <h1>ToDo List</h1>
+
+            <ul>
+                <li th:each="todo: ${todos}">
+                    <span th:text="${todo.title}"></span> - <span th:text="${todo.description}"></span>
+                    <form action="/delete" method="post" style="display:inline;">
+                        <input type="hidden" name="id" th:value="${todo.id}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+                <!--                <li th:each="todo : ${todos}">
+                                    <span th:text="${todo.title}" th:classappend="${todo.completed ? 'completed' : ''}"></span>
+                                    - <span th:text="${todo.description}"></span>
+                                    <form action="/complete" method="get" style="display:inline;">
+                                        <input type="hidden" name="id" th:value="${todo.id}">
+                                        <button type="submit" th:disabled="${todo.completed}">Complete</button>
+                                    </form>
+                                    <form action="/delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="id" th:value="${todo.id}">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                </li>-->
+
+            </ul>
+
+            <h2>Add a new Todo</h2>
+            <form action="/add" method="post">
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="description" placeholder="Description" required>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+
+
+    </body>
+</html>
